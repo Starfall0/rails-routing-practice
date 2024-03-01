@@ -1,13 +1,15 @@
-source 'https://rubygems.org'
-ruby '2.3.1'
+# frozen_string_literal: true
 
-gem 'sinatra', '>= 1.4'
+source 'https://rubygems.org'
+ruby '>= 2.3.1'
+
 gem 'rails', '~> 4.2'
+gem 'sinatra', '>= 1.4'
 
 group :development, :test do
+  gem 'capybara', '2.4.4'
   gem 'cucumber', '2.0.0'
   gem 'cucumber-sinatra', '0.5.0'
-  gem 'capybara', '2.4.4'
 
   gem 'rspec', '3.3.0'
   gem 'rspec-autotest', '1.0.0'

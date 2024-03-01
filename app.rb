@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
-require './lib/route_recognizer.rb'
+require './lib/route_recognizer'
 
 Result = Struct.new(:route, :controller, :action, :params, :error)
 
 class RouteRecognizerApp < Sinatra::Base
-
   get '/' do
     @router = RouteRecognizer.new('')
     @result = nil
@@ -15,9 +16,9 @@ class RouteRecognizerApp < Sinatra::Base
     @routes = params[:routes_table_text].to_s
     @result = Result.new
     method = params[:route_method].upcase
-    @is_post = %w(POST PUT PATCH).include?(method)
+    @is_post = %w[POST PUT PATCH].include?(method)
     @result.route = "#{method} #{params[:route_uri]}"
-    logger.info %Q{::#{@result.route}::#{@routes.gsub("\n"," ; ")}}
+    logger.info %(::#{@result.route}::#{@routes.gsub("\n", ' ; ')})
     begin
       @router = RouteRecognizer.new(@routes)
       result_params = @router.recognize(params[:route_method], params[:route_uri])
